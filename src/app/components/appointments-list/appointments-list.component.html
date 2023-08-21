@@ -1,0 +1,76 @@
+<div class="list row">
+    <div class="col-md-8">
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search by appointment type"
+          [(ngModel)]="type"
+        />
+        <div class="input-group-append">
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            (click)="searchType()"
+          >
+            Search
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <h4>Appointment List</h4>
+      <button class="mb-3 mt-3 btn btn-sm btn-success" routerLink="/add">
+        Add New Appointment
+      </button>
+      <button 
+          class="mb-3 mt-3 btn btn-sm btn-warning" 
+          style="margin-left: 2rem; color: white;"
+          (click)="downloadExcel()">Download Excel</button>
+      <!-- <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="let appointment of appointments; let i = index"
+          [class.active]="i == currentIndex"
+          (click)="setActiveAppointment(appointment, i)"
+        >
+          {{ appointment.appointmentType }}
+        </li>
+      </ul> -->
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Appointment ID</th>
+            <th scope="col">Appointment Type</th>
+            <th scope="col">Date</th>
+            <th scope="col">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr 
+            *ngFor="let appointment of appointments; let i = index"
+            [class.active]="i == currentIndex"
+            (click)="setActiveAppointment(appointment, i)"
+          >
+            <th scope="row">{{ appointment.appointmentID }}</th>
+            <td>{{ appointment.appointmentType }}</td>
+            <td>{{ appointment.date }}</td>
+            <td>{{ appointment.amount }}</td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <button class="m-3 btn btn-sm btn-danger" (click)="removeAllAppointments()">
+        Remove All Appointment
+      </button>
+    </div>
+
+    <div class="col-md-6">
+      <app-appointment-details
+        [viewMode]="true"
+        [currentAppointment]="currentAppointment"
+      ></app-appointment-details>
+    </div>
+    
+  </div>
+  
